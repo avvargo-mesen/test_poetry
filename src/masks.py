@@ -31,8 +31,8 @@ def get_mask_card_number(card_number: int) -> str:
     return mask_card_number_total
 
 
-result = get_mask_card_number(7000792289606361)
-print(result)
+#result = get_mask_card_number(7000792289606361)
+#print(result)
 
 
 # Задание 2
@@ -58,5 +58,5 @@ def get_mask_account(account_number: int) -> str:
     return result_str
 
 
-result = get_mask_account(73654108430135874305)
-print(result)
+#result = get_mask_account(73654108430135874305)
+#print(result)
