@@ -1,3 +1,5 @@
+from src.masks import get_mask_card_number, get_mask_account
+
 def mask_account_card(type_card_account_numbers: str) -> str:
     '''Функция возвращает строку с замаскированным номером'''
     list_type = []
@@ -14,11 +16,9 @@ def mask_account_card(type_card_account_numbers: str) -> str:
             list_number.append(item)
             str_number = ''.join(list_number)
             if len(str_number) == 16:
-                from src.masks import get_mask_card_number
 
                 return str_type + " " + get_mask_card_number(int(str_number))
             elif len(str_number) == 20:
-                from src.masks import get_mask_account
 
                 return str_type + " " + get_mask_account(int(str_number))
             else:
