@@ -36,8 +36,11 @@ print(result)
 
 def get_date(current_date: str) -> str:
     '''Функиця возвращает дату в нужном формате'''
-    slice_date = current_date[:10]
-    new_date_format = f"{slice_date[-2:]}.{slice_date[5:7]}.{slice_date[:4]}"
+    if current_date == " ":
+        return "Дата не введена"
+    else:
+        slice_date = current_date[:10]
+        new_date_format = f"{slice_date[-2:]}.{slice_date[5:7]}.{slice_date[:4]}"
 
     return new_date_format
 
