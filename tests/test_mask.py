@@ -7,17 +7,18 @@
 # Проверка, что функция корректно обрабатывает входные строки, где отсутствует номер карты.
 
 import pytest
-from src.masks import get_mask_card_number
+
 from src.masks import get_mask_account
+from src.masks import get_mask_card_number
+
 
 # все варианты проверки: верная карта, больше и меньше цифр, отсуствие номера карты
 @pytest.mark.parametrize("card, expected", [
-(7000792289606361, "7000 79** **** 6361"),
-(70007922896063611, "Введите номер карты заново"),
-(700079228960636, "Введите номер карты заново"),
-("", "Введите номер карты заново")])
-
-def test_get_mask_card_number(card, expected):
+    (7000792289606361, "7000 79** **** 6361"),
+    (70007922896063611, "Введите номер карты заново"),
+    (700079228960636, "Введите номер карты заново"),
+    ("", "Введите номер карты заново")])
+def test_get_mask_card_number(card: int, expected: str) -> None:
     assert get_mask_card_number(card) == expected
 
 # def test_get_mask_card_number():
@@ -41,12 +42,12 @@ def test_get_mask_card_number(card, expected):
 # Проверка работы функции с различными форматами и длинами номеров счетов.
 # Проверка, что функция корректно обрабатывает входные данные, где номер счета меньше ожидаемой длины.
 
+
 # все варианты проверки: верный счет, больше и меньше цифр, отсуствие номера счета
 @pytest.mark.parametrize("account, expected", [
-(73654108430135874305, "**4305"),
-(736541084301358743055, "Введите номер счета заново"),
-(7365410843013587430, "Введите номер счета заново"),
-("", "Введите номер счета заново")])
-
-def test_get_mask_account (account, expected):
-    assert get_mask_account (account) == expected
+    (73654108430135874305, "**4305"),
+    (736541084301358743055, "Введите номер счета заново"),
+    (7365410843013587430, "Введите номер счета заново"),
+    ("", "Введите номер счета заново")])
+def test_get_mask_account(account: int, expected: str) -> None:
+    assert get_mask_account(account) == expected

@@ -1,7 +1,8 @@
 import pytest
 
+
 @pytest.fixture
-def my_list():
+def my_list() -> list[dict]:
     return [
         {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
         {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},
@@ -11,12 +12,12 @@ def my_list():
 
 
 @pytest.fixture
-def my_list_zero():
+def my_list_zero() -> list[dict]:
     return []
 
 
 @pytest.fixture
-def my_list_same_date():
+def my_list_same_date() -> list[dict]:
     return [
         {'id': 41428829, 'state': 'EXECUTED', 'date': '2019-07-03T18:35:29.512364'},
         {'id': 939719570, 'state': 'EXECUTED', 'date': '2018-06-30T02:08:58.425572'},
@@ -26,7 +27,7 @@ def my_list_same_date():
 
 
 @pytest.fixture
-def my_list_bad_date():
+def my_list_bad_date() -> list[dict]:
     return [
         {'id': 41428829, 'state': 'EXECUTED', 'date': ' '},
         {},
