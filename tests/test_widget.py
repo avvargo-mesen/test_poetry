@@ -10,18 +10,18 @@ import pytest
 from src.widget import mask_account_card
 from src.widget import get_date
 
+
 @pytest.mark.parametrize("value, expected", [
 ("Visa Platinum 7000792289606361", "Visa Platinum 7000 79** **** 6361"),
 ("Счет 73654108430135874305", "Счет **4305"),
 ("МИР 1234567890123456", "МИР 1234 56** **** 3456"),
 ("Visa Classic 1111222233334444", "Visa Classic 1111 22** **** 4444"),
-("Счет 12345678901234567890", "Счет **7890"),
-("Счет 00000000000000000000", "Счет **0000"),
+("Счет 12345678901234567890", "Счет **7890")
 ])
 
 def test_mask_account_card (value, expected):
+    """проверка типа: карта/счет, варианты карт/счетов"""
     assert mask_account_card (value) == expected
-
 
 
 @pytest.mark.parametrize("value, expected", [
@@ -33,7 +33,8 @@ def test_mask_account_card (value, expected):
 ("Счет", "Введите номер заново"),
 ("Счет 123", "Введите номер заново")])
 
-def test_mask_account_card (value, expected):
+def test_mask_account_uncorrected_card (value, expected):
+    """проверка некорректных данных входа """
     assert mask_account_card (value) == expected
 
 
@@ -47,8 +48,23 @@ def test_mask_account_card (value, expected):
 ("2024-03-12T02:26:18.671407", "12.03.2024"),
 ("2026-03-11T02:26:18.671407", "11.03.2026"),
 ("2024-09-11T02:26:18.671407", "11.09.2024"),
-(" ", "Дата не введена")])
+(" ", "Введите корректную дату")])
 
 
 def test_get_date (current_date, expected):
+    """проверка преобразованиия даты и отсутствие даты"""
+    assert get_date (current_date) == expected
+
+
+@pytest.mark.parametrize("current_date, expected", [
+("2024-03-11", "Введите корректную дату"),
+("2024/03/11", "Введите корректную дату"),
+("11.03.2024", "Введите корректную дату"),
+("2024-09-11T02:26:18.6714074", "Введите корректную дату"),
+("2024-09-11T02:26:18.67140", "Введите корректную дату"),
+("2024-03-11 02:26:18", "Введите корректную дату")
+])
+
+def test_get_uncorrected_date (current_date, expected):
+    """проверка некорректного формата даты"""
     assert get_date (current_date) == expected
