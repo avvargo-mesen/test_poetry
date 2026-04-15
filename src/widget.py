@@ -30,17 +30,20 @@ def mask_account_card(type_card_account_numbers: str) -> str:
     return "Введите номер заново"  # добавила, т.к. ругался mypy
 
 
-result = mask_account_card("Счет 73654108430135874305")
-print(result)
+# result = mask_account_card("Счет 73654108430135874305")
+# print(result)
 
 
 def get_date(current_date: str) -> str:
     '''Функиця возвращает дату в нужном формате'''
-    slice_date = current_date[:10]
-    new_date_format = f"{slice_date[-2:]}.{slice_date[5:7]}.{slice_date[:4]}"
+    if current_date == " " or len(current_date) != 26:
+        return "Введите корректную дату"
+    else:
+        slice_date = current_date[:10]
+        new_date_format = f"{slice_date[-2:]}.{slice_date[5:7]}.{slice_date[:4]}"
 
     return new_date_format
 
 
-result = get_date("1999-10-11T02:26:18.671407")
-print(result)
+# result = get_date("1999-10-11T02:26:18.671407")
+# print(result)
