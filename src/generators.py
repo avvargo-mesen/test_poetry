@@ -109,11 +109,35 @@ gen_descriptions = transaction_descriptions([{
         "from": "Счет 75106830613657916952",
         "to": "Счет 11776614605963066702"}])
 
-first_item = next(gen_descriptions)
+# first_item = next(gen_descriptions)
+# print(first_item)
+# second_item = next(gen_descriptions)
+# print(second_item)
+# third_item = next(gen_descriptions)
+# print(third_item)
+
+def card_number_generator(start: int, stop: int) -> Generator:
+    card_number = ""
+    card_number_new = ""
+    for i in range(start, stop + 1):
+        card_number = f"{i:016d}"
+        card_number_1 = card_number[0:4]
+        card_number_2 = card_number[4:8]
+        card_number_3 = card_number[8:12]
+        card_number_4 = card_number[12:16]
+        card_number_new = f"{card_number_1} {card_number_2} {card_number_3} {card_number_4}"
+        yield card_number_new
+
+gen_card_number = card_number_generator(1, 5)
+
+first_item = next(gen_card_number)
 print(first_item)
-second_item = next(gen_descriptions)
+second_item = next(gen_card_number)
 print(second_item)
-third_item = next(gen_descriptions)
+third_item = next(gen_card_number)
 print(third_item)
+
+
+
 
 
