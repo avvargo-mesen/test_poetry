@@ -1,10 +1,14 @@
-def filter_by_currency (transactions: list[dict], currency: str) -> Generator[dict]:
+from typing import Iterator
+
+
+def filter_by_currency(transactions: list[dict], currency: str) -> Iterator[dict]:
     '''Генератор возвращает транзакции, где валюта соответствует заданной.'''
     for d in transactions:
         if d["operationAmount"]["currency"]["name"] == currency:
             yield d
 
 # yield list(filter(lambda x: x["operationAmount"]["currency"]["name"] == currency, transactions_list))
+
 
 gen_currency = filter_by_currency([{
           "id": 939719570,
@@ -22,20 +26,19 @@ gen_currency = filter_by_currency([{
           "to": "Счет 11776614605963066702"
       },
       {
-              "id": 142264268,
-              "state": "EXECUTED",
-              "date": "2019-04-04T23:20:05.206878",
-              "operationAmount": {
-                  "amount": "79114.93",
-                  "currency": {
-                      "name": "RUB",
-                      "code": "RUB"
-                  }
-              },
-              "description": "Перевод со счета на счет",
-              "from": "Счет 19708645243227258542",
-              "to": "Счет 75651667383060284188"},
-    {
+          "id": 142264268,
+          "state": "EXECUTED",
+          "date": "2019-04-04T23:20:05.206878",
+          "operationAmount": {
+              "amount": "79114.93",
+              "currency": {
+                  "name": "RUB",
+                  "code": "RUB"
+              }
+          },
+          "description": "Перевод со счета на счет",
+          "from": "Счет 19708645243227258542",
+          "to": "Счет 75651667383060284188"},    {
         "id": 939719570,
         "state": "EXECUTED",
         "date": "2019-08-30T02:08:58.425572",
@@ -60,10 +63,11 @@ gen_currency = filter_by_currency([{
 # for _ in range(2):
 #     print(next(usd_transactions))
 
-def transaction_descriptions(transactions: list[dict]) -> Generator[str]:
+def transaction_descriptions(transactions: list[dict]) -> Iterator[str]:
     '''Генератор возвращает описание каждой операции по очереди.'''
     for d in transactions:
         yield d["description"]
+
 
 gen_descriptions = transaction_descriptions([{
           "id": 939719570,
@@ -93,8 +97,7 @@ gen_descriptions = transaction_descriptions([{
               },
               "description": "Перевод со счета на счет",
               "from": "Счет 19708645243227258542",
-              "to": "Счет 75651667383060284188"},
-    {
+              "to": "Счет 75651667383060284188"},    {
         "id": 939719570,
         "state": "EXECUTED",
         "date": "2019-08-30T02:08:58.425572",
@@ -116,7 +119,8 @@ gen_descriptions = transaction_descriptions([{
 # third_item = next(gen_descriptions)
 # print(third_item)
 
-def card_number_generator(start: int, stop: int) -> Generator[str]:
+
+def card_number_generator(start: int, stop: int) -> Iterator[str]:
     '''Генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX.'''
     card_number = ""
     card_number_new = ""
@@ -129,16 +133,12 @@ def card_number_generator(start: int, stop: int) -> Generator[str]:
         card_number_new = f"{card_number_1} {card_number_2} {card_number_3} {card_number_4}"
         yield card_number_new
 
+
 gen_card_number = card_number_generator(1, 5)
 
-first_item = next(gen_card_number)
-print(first_item)
-second_item = next(gen_card_number)
-print(second_item)
-third_item = next(gen_card_number)
-print(third_item)
-
-
-
-
-
+# first_item = next(gen_card_number)
+# print(first_item)
+# second_item = next(gen_card_number)
+# print(second_item)
+# third_item = next(gen_card_number)
+# print(third_item)

@@ -34,6 +34,7 @@ def my_list_bad_date() -> list[dict]:
         {'id': 594226727, 'state': 'CANCELED', 'date': '12-09-2018T21:27:25.24168'}
     ]
 
+
 @pytest.fixture
 def list_by_currency() -> list[dict]:
     return [{
@@ -64,8 +65,7 @@ def list_by_currency() -> list[dict]:
               },
               "description": "Перевод со счета на счет",
               "from": "Счет 19708645243227258542",
-              "to": "Счет 75651667383060284188"},
-    {
+              "to": "Счет 75651667383060284188"},    {
         "id": 939719570,
         "state": "EXECUTED",
         "date": "2019-08-30T02:08:58.425572",
@@ -79,6 +79,7 @@ def list_by_currency() -> list[dict]:
         "description": "Перевод организации",
         "from": "Счет 75106830613657916952",
         "to": "Счет 11776614605963066702"}]
+
 
 @pytest.fixture
 def list_by_currency_empty() -> list[dict]:
