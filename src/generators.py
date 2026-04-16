@@ -1,5 +1,5 @@
 def filter_by_currency (transactions: list[dict], currency: str) -> Generator[dict]:
-    '''Генератор возвращает транзакции, где валюта соответствует заданной'''
+    '''Генератор возвращает транзакции, где валюта соответствует заданной.'''
     for d in transactions:
         if d["operationAmount"]["currency"]["name"] == currency:
             yield d
@@ -61,7 +61,7 @@ print(second_item)
 #     print(next(usd_transactions))
 
 def transaction_descriptions(transactions: list[dict]) -> Generator[str]:
-    '''Генератор возвращает описание каждой операции по очереди'''
+    '''Генератор возвращает описание каждой операции по очереди.'''
     for d in transactions:
         yield d["description"]
 
@@ -117,7 +117,7 @@ gen_descriptions = transaction_descriptions([{
 # print(third_item)
 
 def card_number_generator(start: int, stop: int) -> Generator[str]:
-    '''Генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX'''
+    '''Генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX.'''
     card_number = ""
     card_number_new = ""
     for i in range(start, stop + 1):
