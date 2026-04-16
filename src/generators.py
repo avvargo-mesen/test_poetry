@@ -1,5 +1,5 @@
-def filter_by_currency (transactions: list[dict], currency: str) -> Generator:
-    '''Функция возвращает транзакции, где валюта соответствует заданной'''
+def filter_by_currency (transactions: list[dict], currency: str) -> Generator[dict]:
+    '''Генератор возвращает транзакции, где валюта соответствует заданной'''
     for d in transactions:
         if d["operationAmount"]["currency"]["name"] == currency:
             yield d
@@ -50,18 +50,18 @@ gen_currency = filter_by_currency([{
         "from": "Счет 75106830613657916952",
         "to": "Счет 11776614605963066702"}], "USD")
 
-# first_item = next(gen_currency)
-# print(first_item)
-# second_item = next(gen_currency)
-# print(second_item)
+first_item = next(gen_currency)
+print(first_item)
+second_item = next(gen_currency)
+print(second_item)
 
 
 # usd_transactions = filter_by_currency(transactions, "USD")
 # for _ in range(2):
 #     print(next(usd_transactions))
 
-def transaction_descriptions(transactions: list[dict]) -> Generator:
-    '''Функция возвращает описание каждой операции по очереди'''
+def transaction_descriptions(transactions: list[dict]) -> Generator[str]:
+    '''Генератор возвращает описание каждой операции по очереди'''
     for d in transactions:
         yield d["description"]
 
@@ -116,7 +116,8 @@ gen_descriptions = transaction_descriptions([{
 # third_item = next(gen_descriptions)
 # print(third_item)
 
-def card_number_generator(start: int, stop: int) -> Generator:
+def card_number_generator(start: int, stop: int) -> Generator[str]:
+    '''Генератор выдает номера банковских карт в формате XXXX XXXX XXXX XXXX'''
     card_number = ""
     card_number_new = ""
     for i in range(start, stop + 1):
@@ -130,12 +131,12 @@ def card_number_generator(start: int, stop: int) -> Generator:
 
 gen_card_number = card_number_generator(1, 5)
 
-first_item = next(gen_card_number)
-print(first_item)
-second_item = next(gen_card_number)
-print(second_item)
-third_item = next(gen_card_number)
-print(third_item)
+# first_item = next(gen_card_number)
+# print(first_item)
+# second_item = next(gen_card_number)
+# print(second_item)
+# third_item = next(gen_card_number)
+# print(third_item)
 
 
 
