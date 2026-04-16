@@ -50,10 +50,10 @@ gen_currency = filter_by_currency([{
         "from": "Счет 75106830613657916952",
         "to": "Счет 11776614605963066702"}], "USD")
 
-first_item = next(gen_currency)
-print(first_item)
-second_item = next(gen_currency)
-print(second_item)
+# first_item = next(gen_currency)
+# print(first_item)
+# second_item = next(gen_currency)
+# print(second_item)
 
 
 # usd_transactions = filter_by_currency(transactions, "USD")
@@ -131,12 +131,12 @@ def card_number_generator(start: int, stop: int) -> Generator[str]:
 
 gen_card_number = card_number_generator(1, 5)
 
-# first_item = next(gen_card_number)
-# print(first_item)
-# second_item = next(gen_card_number)
-# print(second_item)
-# third_item = next(gen_card_number)
-# print(third_item)
+first_item = next(gen_card_number)
+print(first_item)
+second_item = next(gen_card_number)
+print(second_item)
+third_item = next(gen_card_number)
+print(third_item)
 
 
 
