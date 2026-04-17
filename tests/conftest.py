@@ -33,3 +33,54 @@ def my_list_bad_date() -> list[dict]:
         {},
         {'id': 594226727, 'state': 'CANCELED', 'date': '12-09-2018T21:27:25.24168'}
     ]
+
+
+@pytest.fixture
+def list_by_currency() -> list[dict]:
+    return [{
+          "id": 939719570,
+          "state": "EXECUTED",
+          "date": "2018-06-30T02:08:58.425572",
+          "operationAmount": {
+              "amount": "9824.07",
+              "currency": {
+                  "name": "USD",
+                  "code": "USD"
+              }
+          },
+          "description": "Перевод организации",
+          "from": "Счет 75106830613657916952",
+          "to": "Счет 11776614605963066702"
+      },
+      {
+              "id": 142264268,
+              "state": "EXECUTED",
+              "date": "2019-04-04T23:20:05.206878",
+              "operationAmount": {
+                  "amount": "79114.93",
+                  "currency": {
+                      "name": "RUB",
+                      "code": "RUB"
+                  }
+              },
+              "description": "Перевод со счета на счет",
+              "from": "Счет 19708645243227258542",
+              "to": "Счет 75651667383060284188"},    {
+        "id": 939719570,
+        "state": "EXECUTED",
+        "date": "2019-08-30T02:08:58.425572",
+        "operationAmount": {
+            "amount": "9823.07",
+            "currency": {
+                "name": "USD",
+                "code": "USD"
+            }
+        },
+        "description": "Перевод организации",
+        "from": "Счет 75106830613657916952",
+        "to": "Счет 11776614605963066702"}]
+
+
+@pytest.fixture
+def list_by_currency_empty() -> list[dict]:
+    return []
