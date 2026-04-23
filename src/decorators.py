@@ -1,4 +1,4 @@
-def log(filename=None):
+def log_decorator(filename=None):
     """Задает файл/консоль для логов"""
     def my_decorator(func):
         """Принимает декорируемую функцию"""
@@ -12,6 +12,7 @@ def log(filename=None):
                 message = (f'{func.__name__} ok')
             except Exception as e:
                 message = (f'{func.__name__} error: {e}. Inputs: {args}, {kwargs}')
+                raise e
             if filename is None:
                 print(start_message)
                 print(message)

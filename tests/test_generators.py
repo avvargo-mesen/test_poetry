@@ -4,7 +4,6 @@ from src.generators import card_number_generator
 from src.generators import filter_by_currency
 from src.generators import transaction_descriptions
 
-
 # функция корректно фильтрует транзакции по заданной валюте
 def test_filter_by_currency(list_by_currency: list) -> None:
     generator = filter_by_currency(list_by_currency, "USD")
