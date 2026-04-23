@@ -77,6 +77,7 @@ print(result)
 2. В модуле widget тестируются функции mask_account_card, get_date
 3. В модуле processing тестируются функции filter_by_state, sort_by_date
 4. В модуле generators тестируются генераторы filter_by_currency, transaction_descriptions, card_number_generator
+5. В модуле decorators тестируется декоратор log_decorator
 
 Покрытие тестами 100%.
 
@@ -217,3 +218,31 @@ print(result)
 0000 0000 0000 0003
 0000 0000 0000 0004
 0000 0000 0000 0005
+
+## Декоратор:
+
+Модуль `decorators.py` содержит функцию-декоратор log_decorator.
+
+### `log_decorator(filename=None)`
+
+**Описание:**
+
+Декоратор автоматически логирует информацию о вызове функций.
+
+**Пример использования:**
+
+Примеры данных на вход:
+
+from src.decorators import log_decorator
+
+@log_decorator()
+def add(a, b):
+    return a + b
+
+add(5, 3)
+
+Пример вывода данных:
+
+Function add started
+add ok
+Function add finished
