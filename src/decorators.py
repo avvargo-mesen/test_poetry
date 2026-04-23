@@ -1,8 +1,13 @@
-def log_decorator(filename=None):
+from typing import Any
+from typing import Callable
+from typing import Optional
+
+
+def log_decorator(filename: Optional[str] = None) -> Callable:
     """Задает файл/консоль для логов"""
-    def my_decorator(func):
+    def my_decorator(func: Callable) -> Callable:
         """Принимает декорируемую функцию"""
-        def wrapper(*args, **kwargs):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             """Принимает аргументы декорируемой функции и возвращает результат"""
             start_message = f"Function {func.__name__} started"
             end_message = f"Function {func.__name__} finished"
@@ -22,7 +27,6 @@ def log_decorator(filename=None):
                     file.write(start_message + '\n')
                     file.write(message + '\n')
                     file.write(end_message + '\n')
-
 
             return result
 
