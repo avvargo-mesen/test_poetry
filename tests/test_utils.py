@@ -1,7 +1,8 @@
-import pytest
-from src.utils import read_json_file
-from unittest.mock import Mock, patch
 from json import JSONDecodeError
+from typing import Any
+from unittest.mock import patch
+
+from src.utils import read_json_file
 
 # def test_read_json_empty_file():
 #     """тест на пустой файл"""
@@ -37,30 +38,39 @@ from json import JSONDecodeError
 #         }]
 
 
+# Пустой файл
 @patch('json.load')
-def test_read_json_empty_file(mock_empty):
+def test_read_json_empty_file(mock_empty: Any) -> None:
     mock_empty.return_value = []
     assert read_json_file("any_path") == []
 
+
+# Файл не найден
 @patch('builtins.open')
-def test_read_json_no_file(mock_no_file):
+def test_read_json_no_file(mock_no_file: Any) -> None:
     mock_no_file.side_effect = FileNotFoundError
     assert read_json_file("any_path") == []
 
+
+# Невозможно декодировать файл
 @patch('builtins.open')
 @patch('json.load')
-def test_read_json_decode(mock_decode, mock_open):
+def test_read_json_decode(mock_decode: Any, mock_open: Any) -> None:
     mock_decode.side_effect = JSONDecodeError("Expecting value", "", 0)
     assert read_json_file("any_path") == []
 
+
+# В файле не список (другой тип данных)
 @patch('json.load')
-def test_read_json_file_dict(mock_dict):
+def test_read_json_file_dict(mock_dict: Any) -> None:
     mock_dict.return_value = {}
     assert read_json_file("any_path") == []
 
+
+# В файле верные данные
 @patch('builtins.open')
 @patch('json.load')
-def test_read_json_good_file(mock_empty, mock_open):
+def test_read_json_good_file(mock_empty: Any, mock_open: Any) -> None:
     mock_empty.return_value = [
         {
             "id": 441945886,
@@ -93,4 +103,3 @@ def test_read_json_good_file(mock_empty, mock_open):
             "from": "Maestro 1596837868705199",
             "to": "Счет 64686473678894779589"
         }]
-
