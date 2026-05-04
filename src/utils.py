@@ -1,6 +1,5 @@
 import json
 from json import JSONDecodeError
-from src import conversion
 
 def read_json_file(filename: str) -> list[dict]:
     """принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях"""
@@ -22,9 +21,9 @@ def read_json_file(filename: str) -> list[dict]:
         # Файл пустой
         return []
 
-    except Exception:
-        # Общий блок для всех остальных исключений
-        return []
+    # except Exception:
+    #     # Общий блок для всех остальных исключений
+    #     return []
 
 # result = read_json_file("../data/operations.json")
 # print(result)
