@@ -47,8 +47,9 @@ def test_read_json_no_file(mock_no_file):
     mock_no_file.side_effect = FileNotFoundError
     assert read_json_file("any_path") == []
 
+@patch('builtins.open')
 @patch('json.load')
-def test_read_json_decode(mock_decode):
+def test_read_json_decode(mock_decode, mock_open):
     mock_decode.side_effect = JSONDecodeError("Expecting value", "", 0)
     assert read_json_file("any_path") == []
 
