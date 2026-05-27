@@ -78,8 +78,10 @@ print(result)
 3. В модуле processing тестируются функции filter_by_state, sort_by_date
 4. В модуле generators тестируются генераторы filter_by_currency, transaction_descriptions, card_number_generator
 5. В модуле decorators тестируется декоратор log_decorator
+6. В модуле utils тестируется функция read_json_file
+7. В модуле external_api тестируется функция convert_to_rubles
 
-Покрытие тестами 100%.
+Покрытие тестами 96%.
 
 ## Генераторы для обработки транзакций:
 
@@ -246,3 +248,80 @@ add(5, 3)
 Function add started
 add ok
 Function add finished
+
+
+## Чтение файла json:
+
+Модуль `utils.py` содержит функцию read_json_file.
+
+### `read_json_file(filename) -> list`
+
+**Описание:**
+
+Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о финансовых транзакциях.
+
+**Пример использования:**
+
+Примеры данных на вход:
+
+из файла .jason
+
+[
+  {
+    "id": 441945886,
+    "state": "EXECUTED",
+    "date": "2019-08-26T10:50:58.294041",
+    "operationAmount": {
+      "amount": "31957.58",
+      "currency": {
+        "name": "руб.",
+        "code": "RUB"
+      }]
+
+Пример вывода данных:
+
+[{'id': 441945886, 'state': 'EXECUTED', 'date': '2019-08-26T10:50:58.294041', 'operationAmount': {'amount':
+ '31957.58', 'currency': {'name': 'руб.', 'code': 'RUB'}}, 'description': 'Перевод организации', 'from': 'M
+aestro 1596837868705199', 'to': 'Счет 64686473678894779589'}]
+
+
+## Сумма транзакции ф рублях:
+
+Модуль `external_api.py` содержит функцию convert_to_rubles.
+
+### `convert_to_rubles(transaction) -> float`
+
+**Описание:**
+
+Фугкция принимает на вход транзакцию и возвращает сумму транзакции (amount) в рублях.
+
+**Пример использования:**
+
+Примеры данных на вход:
+
+По url через api_key
+{
+    "id": 41428829,
+    "state": "EXECUTED",
+    "date": "2019-07-03T18:35:29.512364",
+    "operationAmount": {
+      "amount": "8221.37",
+      "currency": {
+        "name": "USD",
+        "code": "USD"
+      }
+    },
+    "description": "Перевод организации",
+    "from": "MasterCard 7158300734726758",
+    "to": "Счет 35383033474447895560"
+  }
+
+Пример вывода данных:
+
+605128.923814
+
+
+## Логирование:
+
+1. В модуле masks добавлены логи функций get_mask_card_number, get_mask_account
+2. В модуле utils добавлены логи функции read_json_file
