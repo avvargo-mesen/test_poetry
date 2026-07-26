@@ -36,7 +36,7 @@ def mask_account_card(type_card_account_numbers: str) -> str:
 
 def get_date(current_date: str) -> str:
     '''Функиця возвращает дату в нужном формате'''
-    if current_date == " " or len(current_date) != 26:
+    if current_date == " " or "T" not in current_date:
         return "Введите корректную дату"
     else:
         slice_date = current_date[:10]
