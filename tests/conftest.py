@@ -31,7 +31,7 @@ def my_list_bad_date() -> list[dict]:
     return [
         {'id': 41428829, 'state': 'EXECUTED', 'date': ' '},
         {},
-]
+    ]
 
 
 @pytest.fixture
@@ -94,6 +94,7 @@ def transactions_for_search():
         {"description": "Оплата услуг", "amount": 400},
     ]
 
+
 @pytest.fixture
 def transactions_for_operations():
     return [
@@ -102,12 +103,14 @@ def transactions_for_operations():
         {'description': 'Перевод с карты на карту'},
     ]
 
+
 @pytest.fixture
 def categories_for_operations():
     return ['Перевод с карты на карту', 'Перевод организации']
+
 
 @pytest.fixture
 def transactions_for_operations_not_my_category():
     return [
         {'description': 'Открытие'},
-]
+    ]

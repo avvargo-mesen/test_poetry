@@ -1,11 +1,15 @@
-from src.masks import get_mask_account
-from src.masks import get_mask_card_number
-from src.utils import read_json_file
-from src.data_reader import read_csv_files, read_excel_files
-from src.processing import filter_by_state, sort_by_date
+# from src.masks import get_mask_account
+# from src.masks import get_mask_card_number
+from src.data_reader import read_csv_files
+from src.data_reader import read_excel_files
 from src.generators import filter_by_currency
+from src.processing import filter_by_state
+from src.processing import sort_by_date
 from src.re_lib import process_bank_search
-from src.widget import mask_account_card, get_date
+from src.utils import read_json_file
+from src.widget import get_date
+from src.widget import mask_account_card
+
 # if __name__ == '__main__':
 #     # Проверка masks
 #     get_mask_card_number(7000792289606361)
@@ -14,7 +18,9 @@ from src.widget import mask_account_card, get_date
 #     # Проверка utils
 #     read_json_file("data/operations.json")
 
+
 def main():
+    """Объединяет функции + пользовательский интерфейс"""
     print('Привет! Добро пожаловать в программу работы с банковскими транзакциями.')
     print('Выберите необходимый пункт меню:')
     print('1. Получить информацию о транзакциях из JSON-файла')
@@ -36,7 +42,7 @@ def main():
             print('Неверный выбор. Попробуйте снова.')
             guest_choice1 = input()
 
-    print('Введите статус, по которому необходимо выполнить фильтрацию. Доступные статусы: EXECUTED, CANCELED, PENDING')
+    print('Введите статус,по которому необходимо выполнить фильтрацию. Доступные статусы: EXECUTED, CANCELED, PENDING')
 
     while True:
         guest_choice2 = input()
@@ -125,7 +131,6 @@ def main():
         print('Распечатываю итоговый список транзакций...')
         print(f'Всего банковских операций в выборке: {len(transactions)}')
 
-
     for transaction in transactions:
         date_new = transaction["date"]
         guest_date = get_date(date_new)
@@ -144,10 +149,11 @@ def main():
                 guest_card_from = mask_account_card(from_mask)
             else:
                 guest_card_from = "Нет данных"
-            print(f"{guest_date} {guest_description}\n{guest_card_from} -> {guest_card_to}\nСумма: {guest_amount} {guest_currency}")
+            print(f"{guest_date} {guest_description}\n"
+                  f"{guest_card_from} -> {guest_card_to}\n"
+                  f"Сумма: {guest_amount} {guest_currency}")
         else:
             print(f"{guest_date} {guest_description}\n{guest_card_to}\nСумма: {guest_amount} {guest_currency}")
-
 
 
 if __name__ == "__main__":
