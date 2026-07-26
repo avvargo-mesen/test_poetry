@@ -30,7 +30,6 @@ def main():
     while True:
         if guest_choice1 == '1':
             transactions = read_json_file("data/operations.json")
-            print(transactions)
             break
         if guest_choice1 == '2':
             transactions = read_csv_files("data/transactions.csv")
@@ -41,7 +40,7 @@ def main():
         else:
             print('Неверный выбор. Попробуйте снова.')
             guest_choice1 = input()
-
+    # print(transactions)
     print('Введите статус,по которому необходимо выполнить фильтрацию. Доступные статусы: EXECUTED, CANCELED, PENDING')
 
     while True:
@@ -61,7 +60,7 @@ def main():
 
     transactions = filter_by_state(transactions, guest_choice2_upp)
 
-    print(transactions)
+    # print(transactions)
 
     print('Отсортировать операции по дате? Да/Нет')
 
@@ -90,7 +89,7 @@ def main():
         else:
             print(f'Выбор {guest_choice3_upp} недоступен. Введите "ДА" или "НЕТ')
 
-    print(transactions)
+    # print(transactions)
 
     print('Выводить только рублевые транзакции? Да/Нет')
 
@@ -106,7 +105,7 @@ def main():
             print(f'Выбор {guest_choice5_upp} недоступен. Введите "ДА" или "НЕТ')
             print(transactions)
 
-    print(transactions)
+    # print(transactions)
 
     print('Отфильтровать список транзакций по определенному слову в описании? Да/Нет')
 
@@ -115,7 +114,7 @@ def main():
         guest_choice6_upp = guest_choice6.upper()
         if guest_choice6_upp == "ДА":
             print("Введите нужное слово")
-            print(f"Количество транзакций до поиска: {len(transactions)}")
+            # print(f"Количество транзакций до поиска: {len(transactions)}")
             guest_choice7 = input()
             guest_choice7_upp = guest_choice7.upper()
             transactions = process_bank_search(transactions, guest_choice7_upp)
@@ -135,25 +134,26 @@ def main():
         date_new = transaction["date"]
         guest_date = get_date(date_new)
         guest_description = transaction["description"]
+
         if "operationAmount" in transaction:
             guest_amount = transaction["operationAmount"]["amount"]
             guest_currency = transaction["operationAmount"]["currency"]["code"]
         else:
             guest_amount = transaction["amount"]
             guest_currency = transaction["currency_code"]
+
         to_mask = transaction["to"]
         guest_card_to = mask_account_card(to_mask)
-        if "from" in transaction:
-            from_mask = transaction.get("from")
-            if from_mask and isinstance(from_mask, str):
-                guest_card_from = mask_account_card(from_mask)
-            else:
-                guest_card_from = "Нет данных"
+
+        if "from" in transaction and isinstance(transaction["from"], str):
+            guest_card_from = mask_account_card(transaction["from"])
             print(f"{guest_date} {guest_description}\n"
                   f"{guest_card_from} -> {guest_card_to}\n"
                   f"Сумма: {guest_amount} {guest_currency}")
         else:
-            print(f"{guest_date} {guest_description}\n{guest_card_to}\nСумма: {guest_amount} {guest_currency}")
+            print(f"{guest_date} {guest_description}\n"
+                  f"{guest_card_to}\n"
+                  f"Сумма: {guest_amount} {guest_currency}")
 
 
 if __name__ == "__main__":
